@@ -52,16 +52,23 @@ y_pred = knn.predict(X_new)
 # Imprimindo os resultados
 print("Predictions: {}".format(y_pred))
 
+
+
+
+
 # MEDINDO A PERFORMANCE DO MODELO
 from sklearn.model_selection import train_test_split
 
 X = df.drop("churn", axis=1).values
 y = df["churn"].values
 
+# separo em dados de teste e de treino
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 knn = knnc(n_neighbors=5)
 
+# treinameos o knn com os dados de treino
 knn.fit(X_train, y_train)
 
-# (o desempenho de um modelo qualquer (%) é a divisão do número de dados corretos pelo total de observações)
+# calculamos o score com o dado de teste
 print(knn.score(X_test,y_test))
+# (o desempenho de um modelo qualquer (%) é a divisão do número de predições corretos pelo total de observações)
